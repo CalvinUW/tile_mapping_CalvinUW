@@ -74,12 +74,22 @@
     <script type="text/javascript">
         mapboxgl.accessToken =
             'pk.eyJ1IjoiamFrb2J6aGFvIiwiYSI6ImNpcms2YWsyMzAwMmtmbG5icTFxZ3ZkdncifQ.P9MBej1xacybKcDN_jehvw';
+
+        const bounds = [
+            [-122.53052090024306, 47.511499940080974],
+            [-122.18372606453114, 47.759]
+        ];
+
         const map = new mapboxgl.Map({
             container: 'map', // container ID
             style: 'mapbox://styles/mapbox/light-v11', // style URL
             center: [-122.33628494223058, 47.63748628060085], // starting position [lng, lat]
-            zoom: 10 // starting zoom
+            zoom: 10, // starting zoom
+            maxBounds: bounds,
+            maxZoom: 14
         });
+        map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
+
 
         map.on('load', () => { //simplifying the function statement: arrow with brackets to define a function
 
@@ -120,7 +130,7 @@
             });
 
             map.addLayer({
-                'id': 'style_only',
+                'id': 'Custom Basemap',
                 'type': 'raster',
                 'layout': {
                     'visibility': 'none'
@@ -129,7 +139,7 @@
             });
 
             map.addLayer({
-                'id': 'theme_only',
+                'id': 'Public Art Installations',
                 'type': 'raster',
                 'layout': {
                     'visibility': 'none'
@@ -138,7 +148,7 @@
             });
 
             map.addLayer({
-                'id': 'style_and_theme',
+                'id': 'Custom Basemap and Public Art Locations',
                 'type': 'raster',
                 'layout': {
                     'visibility': 'none'
@@ -147,7 +157,7 @@
             });
 
             map.addLayer({
-                'id': 'wood_style',
+                'id': 'Environmental Protection Themed Basemap',
                 'type': 'raster',
                 'layout': {
                     'visibility': 'none'
@@ -157,15 +167,20 @@
 
 
         });
+
         map.on('idle', () => {
             // If these two layers were not added to the map, abort
-            if (!map.getLayer('style_only') || !map.getLayer('theme_only') || !map.getLayer('style_and_theme') ||
-                !map.getLayer('wood_style')) {
+            map.setMaxZoom(14);
+            if (!map.getLayer('Custom Basemap') || !map.getLayer('Public Art Installations') || !map.getLayer(
+                    'Custom Basemap and Public Art Locations') ||
+                !map.getLayer('Environmental Protection Themed Basemap')) {
                 return;
             }
 
             // Enumerate ids of the layers.
-            const toggleableLayerIds = ['style_only', 'theme_only', 'style_and_theme', 'wood_style'];
+            const toggleableLayerIds = ['Custom Basemap', 'Public Art Installations',
+                'Custom Basemap and Public Art Locations', 'Environmental Protection Themed Basemap'
+            ];
 
             // Set up the corresponding toggle button for each layer.
             for (const id of toggleableLayerIds) {
