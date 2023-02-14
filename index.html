@@ -65,12 +65,27 @@
         #menu a.active:hover {
             background: #3074a4;
         }
+
+        #title {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin-top: 20px;
+            margin-left: 20px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 25pt;
+            color: white
+        }
+
     </style>
 </head>
 
 <body>
     <div id="menu"></div>
     <div id="map"></div>
+    <div id="title">
+        Tile Mapping 
+    </div>
     <script type="text/javascript">
         mapboxgl.accessToken =
             'pk.eyJ1IjoiamFrb2J6aGFvIiwiYSI6ImNpcms2YWsyMzAwMmtmbG5icTFxZ3ZkdncifQ.P9MBej1xacybKcDN_jehvw';
