@@ -10,7 +10,7 @@ mapboxgl.accessToken =
             container: 'map', // container ID
             style: 'mapbox://styles/mapbox/light-v11', // style URL
             center: [-122.33628494223058, 47.63748628060085], // starting position [lng, lat]
-            zoom: 10, // starting zoom
+            zoom: 11, // starting zoom
             maxBounds: bounds,
             maxZoom: 14
         });
@@ -18,43 +18,43 @@ mapboxgl.accessToken =
 
         map.on('load', () => { //simplifying the function statement: arrow with brackets to define a function
 
-            map.addSource('style_only_tiles', {
+            map.addSource('style_only_tiles', { // Add the first tile set
                 'type': 'raster',
                 'tiles': [
-                    'assets/tiles_no_theme/{z}/{x}/{y}.png'
-                ],
-                'tileSize': 256,
-                'attribution': 'Map tiles designed by Calvin Standaer</a>'
-            });
-
-            map.addSource('theme_only_tiles', {
-                'type': 'raster',
-                'tiles': [
-                    'assets/just_theme/{z}/{x}/{y}.png'
+                    'assets/tile_sets_1/{z}/{x}/{y}.png'
                 ],
                 'tileSize': 256,
                 'attribution': 'Map tiles designed by Calvin Standaert</a>'
             });
 
-            map.addSource('style_theme_tiles', {
+            map.addSource('theme_only_tiles', { // Add the second tile set
                 'type': 'raster',
                 'tiles': [
-                    'assets/style_theme/{z}/{x}/{y}.png'
+                    'assets/tile_sets_2/{z}/{x}/{y}.png'
                 ],
                 'tileSize': 256,
-                'attribution': 'Map tiles designed by Calvin Standaer</a>'
+                'attribution': 'Map tiles designed by Calvin Standaert</a>'
             });
 
-            map.addSource('wood_style_tiles', {
+            map.addSource('style_theme_tiles', { // Add the third tile set
                 'type': 'raster',
                 'tiles': [
-                    'assets/wood_theme/{z}/{x}/{y}.png'
+                    'assets/tile_sets_3/{z}/{x}/{y}.png'
                 ],
                 'tileSize': 256,
-                'attribution': 'Map tiles designed by Calvin Standaer</a>'
+                'attribution': 'Map tiles designed by Calvin Standaert</a>'
             });
 
-            map.addLayer({
+            map.addSource('wood_style_tiles', { // Add the fourth tile set
+                'type': 'raster',
+                'tiles': [
+                    'assets/tile_sets_4/{z}/{x}/{y}.png'
+                ],
+                'tileSize': 256,
+                'attribution': 'Map tiles designed by Calvin Standaert</a>'
+            });
+
+            map.addLayer({ // Add the first tile set as a raster layer
                 'id': 'Custom Basemap',
                 'type': 'raster',
                 'layout': {
@@ -63,7 +63,7 @@ mapboxgl.accessToken =
                 'source': 'style_only_tiles'
             });
 
-            map.addLayer({
+            map.addLayer({ // Add the second tile set as a raster layer
                 'id': 'Public Art Installations',
                 'type': 'raster',
                 'layout': {
@@ -72,7 +72,7 @@ mapboxgl.accessToken =
                 'source': 'theme_only_tiles'
             });
 
-            map.addLayer({
+            map.addLayer({ // Add the third tile set as a raster layer
                 'id': 'Custom Basemap and Public Art Locations',
                 'type': 'raster',
                 'layout': {
@@ -81,7 +81,7 @@ mapboxgl.accessToken =
                 'source': 'style_theme_tiles'
             });
 
-            map.addLayer({
+            map.addLayer({ // Add the fourth tile set as a raster layer
                 'id': 'Environmental Protection Themed Basemap',
                 'type': 'raster',
                 'layout': {
