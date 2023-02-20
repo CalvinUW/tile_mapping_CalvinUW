@@ -35,4 +35,4 @@ The fourth and final tile set is of a custom environmental protection-themed bas
 The location data and names for the thematic layer of Seattle public art installations was provided by the [Seattle Open Data portal](https://data.seattle.gov/), with the specific dataset used being found [here](https://data.seattle.gov/Community/Public-Art-Data/j7sn-tdzk).
 
 ## Acknowledgement:
-This map and the tilesets, layers, and basemaps contained in it were created by Calvin Standaert as part of a project in the University of Washington's 2023 Winter quarter of GEOG458 taught by Professor Bo Zhao. The code for the web map itself is derived from templates and guides created by Bo Zhao and his teaching team.
+This map and the tilesets, layers, and basemaps contained in it were created by Calvin Standaert as part of a project in the University of Washington's 2023 Winter quarter of GEOG458 taught by Professor Bo Zhao. The code for this web map was derived from templates and guides created by Bo Zhao and his teaching team.
