@@ -1,135 +1,4 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <title>Display a map on a webpage</title>
-    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-    <link href="https://api.mapbox.com/mapbox-gl-js/v2.12.1/mapbox-gl.css" rel="stylesheet">
-    <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.1/mapbox-gl.js"></script>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
-
-        #map {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 100%;
-        }
-
-        /* the style of the layer control menu */
-        #menu {
-            background: #fff;
-            position: absolute;
-            z-index: 1;
-            top: 10px;
-            right: 10px;
-            border-radius: 3px;
-            width: 120px;
-            border: 1px solid rgba(0, 0, 0, 0.4);
-            font-family: 'Open Sans', sans-serif;
-        }
-
-        /* each layer on the menu */
-        #menu a {
-            font-size: 13px;
-            color: #404040;
-            display: block;
-            margin: 0;
-            padding: 0;
-            padding: 10px;
-            text-decoration: none;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.25);
-            text-align: center;
-        }
-
-        /* the last item of the layer items will not include a seperator */
-        #menu a:last-child {
-            border: none;
-        }
-
-        /* change color and background color while a pointer is on an hybrid link. */
-        #menu a:hover {
-            background-color: #f8f8f8;
-            color: #404040;
-        }
-
-        #menu a.active {
-            background-color: #3887be;
-            color: #ffffff;
-        }
-
-        #menu a.active:hover {
-            background: #3074a4;
-        }
-
-        #title {
-            position: absolute;
-            top: 0;
-            left: 0;
-            margin-top: 20px;
-            margin-left: 20px;
-            font-family: 'Open Sans', sans-serif;
-            font-size: 25pt;
-            color: white;
-            text-shadow: 0 0 5px #000000, 0 0 5px #000000, 0 0 5px #000000;
-        }
-
-        #subtitle {
-            position: absolute;
-            top: 0;
-            left: 0;
-            margin-top: 70px;
-            margin-left: 40px;
-            font-family: 'Open Sans', sans-serif;
-            font-size: 15pt;
-            color: white;
-            text-shadow: 0 0 5px #000000, 0 0 5px #000000, 0 0 5px #000000;
-        }
-
-        #info {
-            position: absolute;
-            border-style: solid;
-            border-width: 1px;
-            border-radius: 3px;
-            top: 150px;
-            margin-left: 20px;
-            width: 400px;
-            padding: 10px;
-            text-align: left;
-            background-color: rgba(255, 255, 255, 0.8);
-            margin-top: 20px;
-            display: none;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-            font-family: Arial, sans-serif;
-        }
-
-        button {
-            position: absolute;
-            top: 140px;
-            margin-left: 20px;
-        }
-    </style>
-</head>
-
-<body>
-    <div id="menu"></div>
-    <div id="map"></div>
-    <div id="title">
-        Seattle, Washington
-    </div>
-    <div id="subtitle">
-        With Generic Mapbox Basemap
-    </div>
-    <button onclick="myFunction()">Description</button>
-    <div id="info">
-        This map displays several custom layers and basemaps custom made by Calvin Standaert. The first layer is a custom brown basemap that depicts the city of Seattle with varying shades of mocha and tan. The second layer shows the public art installations found in the city of Seattle. The third layer combines both layers one and two, to show the public art installations of Seattle with a custom brown basemap. Finally, the last layer depicts the city of Seattle with a custom environmental-themed tileset.
-    </div>
-    <script type="text/javascript">
-        mapboxgl.accessToken =
+mapboxgl.accessToken =
             'pk.eyJ1IjoiamFrb2J6aGFvIiwiYSI6ImNpcms2YWsyMzAwMmtmbG5icTFxZ3ZkdncifQ.P9MBej1xacybKcDN_jehvw';
 
         const bounds = [
@@ -145,8 +14,7 @@
             maxBounds: bounds,
             maxZoom: 14
         });
-        map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
-
+        map.addControl(new mapboxgl.NavigationControl(), 'bottom-right'); // Adds the compass widget from mapbox to the bottom right of the map
 
         map.on('load', () => { //simplifying the function statement: arrow with brackets to define a function
 
@@ -241,11 +109,11 @@
 
             const titles = {'Custom Basemap':'Seattle, Washington', 'Public Art Installations':'Seattle Public Art Installations',
                 'Custom Basemap and Public Art Locations':'Seattle Public Art Installations', 'Environmental Protection Themed Basemap':'Seattle, Washington'
-            };
+            }; // A dictionary of titles to be used - accessed by inputting the current layer's id
 
             const subtitles = {'Custom Basemap':'With Custom Brown Basemap', 'Public Art Installations':'With Generic Mapbox Basemap',
                 'Custom Basemap and Public Art Locations':'With Custom Brown Basemap', 'Environmental Protection Themed Basemap':'With Custom Environmental Themed Basemap'
-            };
+            }; // A dictionary of subtitles to be used - accessed by inputting the current layer's id
 
             // Set up the corresponding toggle button for each layer.
             for (const id of toggleableLayerIds) {
@@ -283,8 +151,8 @@
                     if (visibility === 'visible') {
                         map.setLayoutProperty(clickedLayer, 'visibility', 'none');
                         this.className = '';
-                        title.innerHTML = 'Seattle, Washington';
-                        subtitle.innerHTML = 'With Generic Mapbox Basemap';
+                        title.innerHTML = 'Seattle, Washington'; // If no layer is visible set title to 'Seattle, Washington'
+                        subtitle.innerHTML = 'With Generic Mapbox Basemap'; // If no layer is visible set subtitle to 'With generic mapbox basemap'
                     } else { //otherise, it will be turned on.
                         this.className = 'active';
                         map.setLayoutProperty(
@@ -292,8 +160,8 @@
                             'visibility',
                             'visible'
                         );
-                        title.innerHTML = titles[link.textContent];
-                        subtitle.innerHTML = subtitles[link.textContent];
+                        title.innerHTML = titles[link.textContent]; // Set title to the string in the titles array at index of layer.id
+                        subtitle.innerHTML = subtitles[link.textContent]; // Set subtitle to the string in the titles array at index of layer.id
                     }
                 };
 
@@ -303,7 +171,7 @@
 
             }
         });
-        function myFunction() { // A simle function that shows map info when a button is clicked
+        function myFunction() { // A simple function that is called to show map info when a button is clicked
                 var x = document.getElementById("info");
                 if (x.style.display === "none") {
                     x.style.display = "block";
@@ -311,8 +179,3 @@
                     x.style.display = "none";
                 }
             }
-    </script>
-
-</body>
-
-</html>
